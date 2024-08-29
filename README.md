@@ -8,7 +8,7 @@ While protein language models (PLMs), such as the highly successful ESM-2, have 
 Model weights for pretrained ProtRNA model would be downloaded first time running the following code:
 
 ```python
-from pretrained import load_model
+from protrna.pretrained import load_model
 
 model = load_model()
 ```
@@ -20,7 +20,7 @@ wget -O ProtRNA_pretrained.h5 'https://www.dropbox.com/scl/fi/lttcohy9ix1rbsynci
 
 ## Inference
 ```python
-from pretrained import load_model
+from protrna.pretrained import load_model
 
 model = load_model()
 batch_converter = model.alphabet.get_batch_converter()

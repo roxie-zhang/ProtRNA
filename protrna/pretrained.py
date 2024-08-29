@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-from model import ProtRNA
+from protrna.model import ProtRNA
 
 
 def load_model(name="ProtRNA_pretrained.h5", path="./weights"):

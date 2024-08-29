@@ -1,7 +1,7 @@
 import itertools
 from typing import Sequence, Tuple, List, Union
 
-from constants import proteinseq_toks, rnaseq_toks
+from protrna.constants import proteinseq_toks, rnaseq_toks
 
 import tensorflow as tf
 

@@ -2,8 +2,8 @@ from typing import Union
 import tensorflow as tf
 from tensorflow.keras import layers, Model
 
-from data import Alphabet
-from modules import RobertaLMHead, TransformerLayer
+from protrna.data import Alphabet
+from protrna.modules import RobertaLMHead, TransformerLayer
 
 
 class ProtRNA(Model):

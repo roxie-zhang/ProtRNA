@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow import Tensor
 from tensorflow.keras import layers
 
-from rotary_embedding import RotaryEmbedding
+from protrna.rotary_embedding import RotaryEmbedding
 
 '''
 Main divergence from the original implementation in esm repo include:

@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras import layers, initializers
 
-from multihead_attention import MultiheadAttention #noqa
+from protrna.multihead_attention import MultiheadAttention #noqa
 
 
 def gelu(x):

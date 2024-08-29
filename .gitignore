@@ -1,0 +1,7 @@
+**/weights
+
+*.ipynb
+*run*.py
+
+*.DS_Store
+**/__pycache__

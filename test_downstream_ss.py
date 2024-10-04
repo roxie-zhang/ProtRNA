@@ -44,7 +44,7 @@ if __name__ == '__main__':
         'f1_shifted': []
     }
 
-    for row in tqdm(dataset[:5]):
+    for row in tqdm(dataset):
         seq_len = row["seq_len"]
         pairs = row["pairs"]
         target = np.zeros((seq_len, seq_len))

@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     # Load dataset
     filename = 'TS0'
-    data_dir = './downstream_ss/dataset'
+    data_dir = './downstream_ss/data'
 
     print('processing', filename)
     file_path = os.path.join(data_dir, filename+'.pickle')

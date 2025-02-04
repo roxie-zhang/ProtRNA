@@ -1,4 +1,6 @@
 **/weights
+**/results
+**/data
 
 *.ipynb
 *run*.py

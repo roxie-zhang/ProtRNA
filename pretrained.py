@@ -17,7 +17,7 @@ def load_pretrained_model(name="ProtRNA", path="./weights"):
         model(np.zeros((1, 512)), need_head_weights=True)  # build model
         file_path = os.path.join(path, f"{name}.h5")
 
-    elif name == "ssHead_RF_bprna":
+    elif 'ssHead_RF' in name:
         model = SSPredictionModel()
         model(np.zeros((1, 10, 1280)), np.zeros((1, 10))) # build model
         file_path = os.path.join(path, f"{name}.h5")

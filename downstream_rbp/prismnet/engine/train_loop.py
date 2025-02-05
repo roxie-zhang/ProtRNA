@@ -3,7 +3,7 @@ import os, copy
 import numpy as np
 import torch
 from tqdm import tqdm
-from prismnet.utils import metrics, datautils
+from downstream_rbp.prismnet.utils import metrics, datautils
     
 def train(args, model, device, train_loader, criterion, optimizer):
     model.train()

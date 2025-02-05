@@ -21,12 +21,12 @@ import torch.nn as nn
 from tensorboardX import SummaryWriter
 import numpy as np
 
-import prismnet.model as arch
-from prismnet import train, validate, inference, log_print, compute_saliency, compute_saliency_img, compute_high_attention_region
+import downstream_rbp.prismnet.model as arch
+from downstream_rbp.prismnet import train, validate, inference, log_print, compute_saliency, compute_saliency_img, compute_high_attention_region
 
-from prismnet.model.utils import GradualWarmupScheduler
-from prismnet.loader import SeqicSHAPE
-from prismnet.utils import datautils
+from downstream_rbp.prismnet.model.utils import GradualWarmupScheduler
+from downstream_rbp.prismnet.loader import SeqicSHAPE
+from downstream_rbp.prismnet.utils import datautils
 
 
 def fix_seed(seed):

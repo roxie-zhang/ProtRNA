@@ -11,7 +11,7 @@ rank=$4
 
 exp=$name
 
-# exp/prismnet_Hela_eval/eval.sh TIA1_Hela features_6e lm1280_red 0
+# exp/prismnet_Hela_eval/eval.sh TIA1_Hela features lm1280_red 0
 python -m tools.main \
     --load_best \
     --eval \

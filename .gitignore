@@ -3,6 +3,7 @@
 **/out
 **/data
 
+*.zip
 *.ipynb
 *run*.py
 

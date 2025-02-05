@@ -1,1 +1,0 @@
-**To reproduce the result of ProtRNA in MRL task，you need to put the feature of data in GSM4084997_varying_length_25to100.csv.gz to "data"folder and run the test.sh script**

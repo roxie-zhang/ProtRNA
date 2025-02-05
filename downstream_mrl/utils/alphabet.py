@@ -1,6 +1,6 @@
 from typing import List
 
-from rinalmo.data.constants import *
+from downstream_mrl.utils.constants import *
 
 class Alphabet:
     def __init__(

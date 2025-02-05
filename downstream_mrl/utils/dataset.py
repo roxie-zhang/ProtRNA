@@ -7,7 +7,7 @@ import pandas as pd
 from typing import Union
 from pathlib import Path
 
-from rinalmo.data.alphabet import Alphabet
+from downstream_mrl.utils.alphabet import Alphabet
 
 MIN_EVAL_SEQ_LEN = 25
 MAX_EVAL_SEQ_LEN = 100
@@ -55,7 +55,7 @@ class RibosomeLoadingDataset(Dataset):
         seq_len = len(seq)
         seq_encoded = torch.tensor(self.alphabet.encode(seq, pad_to_len=self.max_enc_seq_len), dtype=torch.long)
 
-        vector_path = os.path.join(self.feature_path,f"{idx}")
+        vector_path = os.path.join(self.feature_path,f"{idx}.npz")
 
         vector_wrap = np.load(vector_path)#读取npz
         key= vector_wrap.files#获取npz-key
@@ -95,6 +95,8 @@ class RibosomeLoadingDataset(Dataset):
 
         random_df = self.df[self.df['set'] == 'random']
         train_idcs = set(random_df.index.values.tolist()) - random7600_idcs
-        train_ds = Subset(self, indices=list(train_idcs))
+        # train_ds = Subset(self, indices=list(train_idcs))
+        train_ds = Subset(self, indices=list(range(10)))
 
-        return train_ds, random7600_ds, human7600_ds
+        # return train_ds, random7600_ds, human7600_ds
+        return train_ds, train_ds, train_ds

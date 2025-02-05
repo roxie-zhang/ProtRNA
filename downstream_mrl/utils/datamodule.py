@@ -5,9 +5,9 @@ import lightning.pytorch as pl
 from typing import Union, Optional
 from pathlib import Path
 
-from rinalmo.data.alphabet import Alphabet
-from rinalmo.data.downstream.ribosome_loading.dataset import RibosomeLoadingDataset
-from rinalmo.utils.download import download_ribosome_loading_data
+from downstream_mrl.utils.alphabet import Alphabet
+from downstream_mrl.utils.dataset import RibosomeLoadingDataset
+# from downstream_mrl.utils.download import download_ribosome_loading_data
 
 VARYING_LEN_25_TO_100_CSV = "GSM4084997_varying_length_25to100.csv.gz"
 
@@ -40,10 +40,10 @@ class RibosomeLoadingDataModule(pl.LightningDataModule):
         self.lm_type = lm_type
         self.test_set = test_set
         
-    def prepare_data(self):
-        if not self.skip_data_preparation and not self._data_prepared:
-            download_ribosome_loading_data(self.data_root)
-            self._data_prepared = True
+    # def prepare_data(self):
+    #     if not self.skip_data_preparation and not self._data_prepared:
+    #         download_ribosome_loading_data(self.data_root)
+    #         self._data_prepared = True
 
     def setup(self, stage: Optional[str] = None):
         dataset = RibosomeLoadingDataset(self.data_root / VARYING_LEN_25_TO_100_CSV,feature_path= self.feature_path, alphabet=self.alphabet, lm_type=self.lm_type)
@@ -58,7 +58,8 @@ class RibosomeLoadingDataModule(pl.LightningDataModule):
             batch_size=self.batch_size,
             num_workers=self.num_workers,
             pin_memory=self.pin_memory,
-            shuffle=True
+            # shuffle=True,
+            shuffle=False
         )
 
     def val_dataloader(self):

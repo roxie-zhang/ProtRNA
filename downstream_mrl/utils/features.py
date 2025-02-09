@@ -7,12 +7,12 @@ import tensorflow as tf
 
 def prepare_features(base_model, batch_converter, data_root: str, feature_path: str, dataset: str):
     
-    dataset_path = f"{data_root}/split.csv.gz"
+    dataset_path = f"{data_root}/GSM4084997_varying_length_25to100.csv.gz"
     data = pd.read_csv(dataset_path)
 
     # Assuming the column with the label splits is named 'split' and the test split is labeled 'test'
-    test_idcs = data[data['split'] == 'test'].index.tolist()
-    print(f"{len(test_idcs)} rows in test dataset")
+    test_idcs = data[data['split'] == dataset].index.tolist()[:10]
+    print(f"{len(test_idcs)} rows in test dataset {dataset}")
 
     os.makedirs(feature_path, exist_ok=True)
     for i in test_idcs:

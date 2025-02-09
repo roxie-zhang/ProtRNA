@@ -25,7 +25,7 @@ def load_pretrained_model(name="ProtRNA", path="./weights"):
     else:
         raise ValueError(f"Unknown model name: {name}")
 
-    weights_url = "https://zenodo.org/records/13888473/files/"+name+".h5"
+    weights_url = "https://zenodo.org/records/14795554/files/"+name+".h5"
     if not os.path.exists(file_path):
         if not os.path.exists(path):
             os.makedirs(path)

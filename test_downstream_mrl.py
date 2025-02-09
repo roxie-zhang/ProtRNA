@@ -1,3 +1,5 @@
+import argparse
+
 import torch
 import lightning.pytorch as pl
 
@@ -8,23 +10,25 @@ from downstream_mrl.model import RibosomeLoadingPredictionWrapper
 from downstream_mrl.utils.datamodule import RibosomeLoadingDataModule
 
 
+TEST_SETS = ["random7600", "human7600"]
+
 MODEL_NAME = "ProtRNA_pretrained"
-TEST_SET = "random7600"
-DEVICE = "cuda"
 
 DATA_ROOT = "downstream_mrl/data"
 FEATURE_PATH = f"{DATA_ROOT}/features"
 OUTPUT_ROOT = "downstream_mrl/output"
 
+DEVICE = "cuda"
 
-if __name__ == '__main__':
+
+def main(args):
 
     base_model = load_pretrained_model(name=MODEL_NAME)
     batch_converter = base_model.alphabet.get_batch_converter()
 
-    prepare_features(base_model, batch_converter, DATA_ROOT, FEATURE_PATH, TEST_SET)
+    prepare_features(base_model, batch_converter, DATA_ROOT, FEATURE_PATH, args.test)
 
-    mrl_model = RibosomeLoadingPredictionWrapper(lm_type="ProtRNA")
+    mrl_model = RibosomeLoadingPredictionWrapper(lm_type=args.lm_type)
     mrl_model.load_state_dict(torch.load("weights/mrlHead.ckpt", map_location=DEVICE)["state_dict"], strict=False)
     
     datamodule = RibosomeLoadingDataModule(
@@ -34,8 +38,8 @@ if __name__ == '__main__':
         num_workers=0,
         pin_memory=True,
         skip_data_preparation=True,
-        lm_type="ProtRNA",
-        test_set=TEST_SET
+        lm_type=args.lm_type,
+        test_set=args.test
     ) 
 
     trainer = pl.Trainer(
@@ -51,3 +55,15 @@ if __name__ == '__main__':
     )
     
     trainer.test(model=mrl_model, datamodule=datamodule)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", type=str, choices=TEST_SETS, required=True
+    )
+    parser.add_argument(
+        "--lm_type", type=str, default="ProtRNA",
+    )
+    args = parser.parse_args()
+    main(args)

@@ -3,7 +3,7 @@ import argparse, os, random
 def configure_device():
     # Create a parser for the --device argument only
     parser = argparse.ArgumentParser(description='Configure device.', add_help=False)
-    parser.add_argument('--device', type=str, help='specify the device rank', default='2')
+    parser.add_argument('--device', type=str, help='specify the device rank', default='0')
     # Parse the arguments
     device_args, other_args = parser.parse_known_args()
 

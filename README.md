@@ -17,12 +17,14 @@ After cloning the repo, you may install the requirements by
 ```
 pip install -r requirements.txt
 ```
+
 where `numpy==1.26.1` and `tensorflow==2.14.0` are sufficient for running the base model inference, and `tqdm` and 
 `scikit-learn` are additional requirements for the downstream evaluation pipeline.
 
-## Usage
 
-Model weights for pretrained ProtRNA model would be downloaded first time running the following code:
+## Inference
+
+Model weights for the ProtRNA model would be downloaded first time running the following code:
 
 ```python
 from pretrained import load_pretrained_model
@@ -30,20 +32,7 @@ from pretrained import load_pretrained_model
 model = load_pretrained_model(name='ProtRNA_pretrained')
 ```
 
-You may also manually download the model weights by command line:
-
-Pre-trained ProtRNA base model:
-```
-wget https://zenodo.org/records/13888473/files/ProtRNA_pretrained.h5
-```
-
-RotaFormer secondary structure prediction head, trained on bpRNA-1m TR0:
-```
-wget https://zenodo.org/records/13888473/files/ssHead_RF_bprna.h5
-```
-
-### Inference
-
+To generate ProtRNA representations of RNA sequences, run:
 ```python
 from pretrained import load_pretrained_model
 
@@ -62,10 +51,43 @@ results = model(seq_tokens, repr_layers=[33])
 print("ProtRNA embeddings:", results["representations"][33])
 ```
 
-### Evaluation
+## Evaluation
 
-For the evaluation results of the secondary structure prediction task on bpRNA-1m, run:
+For detailed descriptions and manual download links for the downstream task datasets and head weights, please visit https://zenodo.org/records/14795554. 
+
+Before running the downstream evaluation tasks, download the required datasets and head weights by executing:
+
+```bash
+./prepare_data.sh
+```
+
+### Secondary Structure prediction
+
+For the secondary structure prediction task on bpRNA-1m, evaluated with [RnaBench](https://github.com/automl/RnaBench) metrics, run:
+```
+python test_downstream_ss_rnabench.py --task bprna
+```
+The average performance metrics on TS0 will be reported.
+
+Note: In a previous version of the paper, this task is evaluated using our own implemented metrics. To run that version, use:
 ```
 python test_downstream_ss.py
 ```
-The average performance metrics on TS0 will be reported.
+
+### Protein-RNA Interaction prediction
+
+The protein-RNA interaction datasets and prediction head architecture are sourced from [PrismNet](https://github.com/kuixu/PrismNet). 
+
+To evaluate a specific protein, e.g. `WTAP_Hela`, run:
+```
+./test_downstream_rbp.sh WTAP_Hela
+```   
+
+### Mean Ribosome Loading prediction
+
+The mean ribosome loading prediction head is sourced from [RiNALMo](https://github.com/lbcb-sci/RiNALMo).
+
+To evaluate on one of the test sets, run:
+```
+ python test_downstream_mrl.py --test random7600
+```

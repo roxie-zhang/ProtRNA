@@ -21,6 +21,7 @@ pip install -r requirements.txt
 where `numpy==1.26.1` and `tensorflow==2.14.0` are sufficient for running the base model inference, and `tqdm` and 
 `scikit-learn` are additional requirements for the downstream evaluation pipeline.
 
+To evaluate downstream tasks performance on secondary structure prediction or protein-RNA interaction prediction, you may refer to [RnaBench](https://github.com/automl/RnaBench) and [PrismNet](https://github.com/kuixu/PrismNet) for dependencies installation.
 
 ## Inference
 
